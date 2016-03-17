@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.yang.my2ndapp.PageFragment;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,12 +11,12 @@ import java.util.Map;
  * Created by chris.black on 6/11/15.
  */
 public class TabPagerAdapter extends FragmentPagerAdapter {
-    private Map<Integer, PageFragment> mPageReferenceMap = new HashMap<>();
+    private Map<Integer, Fragment> mPageReferenceMap = new HashMap<>();
 
     private static final String[] TITLES = new String[] {
-            "Page 1",
-            "Page 2",
-            "Page 3",
+            "进度",
+            "步数",
+            "速度",
 
     };
 
@@ -40,16 +38,27 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        PageFragment myFragment = PageFragment.create(position + 1);
-        mPageReferenceMap.put(position, myFragment);
-        return myFragment;
+        if(position == 0){
+            PageFragment1 myFragment1 = PageFragment1.create(position + 1);
+            mPageReferenceMap.put(position, myFragment1);
+            return myFragment1;
+        }else if(position == 1){
+            PageFragment2 myFragment2 = PageFragment2.create(position + 1);
+            mPageReferenceMap.put(position, myFragment2);
+            return myFragment2;
+        }else{
+            PageFragment3 myFragment3 = PageFragment3.create(position + 1);
+            mPageReferenceMap.put(position, myFragment3);
+            return myFragment3;
+        }
+
     }
 
     public void destroy() {
         mPageReferenceMap.clear();
     }
 
-    public PageFragment getFragment(int key) {
+    public Fragment getFragment(int key) {
         //Log.d(TAG, "GET: " + key);
         return mPageReferenceMap.get(key);
     }

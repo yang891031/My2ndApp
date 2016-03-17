@@ -1,32 +1,34 @@
 package com.example.yang.my2ndapp;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.shinelw.library.ColorArcProgressBar;
 
 //import com.blackcj.designsupportexample.adapters.RecyclerViewAdapter;
 
 /**
  * Created by chris.black on 6/11/15.
  */
-public class PageFragment extends Fragment {
+public class PageFragment2 extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
     private SwipeRefreshLayout mSwipeRefreshLayout;
     //protected RecyclerViewAdapter.OnItemClickListener mCallback;
     private int mPage;
+    private Button button2;
+    private ColorArcProgressBar bar2;
 
 
-    public static PageFragment create(int page) {
+    public static PageFragment2 create(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        PageFragment fragment = new PageFragment();
+        PageFragment2 fragment = new PageFragment2();
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,7 +42,7 @@ public class PageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_page2, container, false);
 
         /*RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new GridLayoutManager(this.getActivity(), 2));
@@ -50,7 +52,7 @@ public class PageFragment extends Fragment {
             adapter.setOnItemClickListener(mCallback);
         }*/
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.contentView);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.contentView2);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -65,6 +67,14 @@ public class PageFragment extends Fragment {
             }
         });
         mSwipeRefreshLayout.setEnabled(false);
+        bar2 = (ColorArcProgressBar) view.findViewById(R.id.bar2);
+        button2 = (Button) view.findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bar2.setCurrentValues(100);
+            }
+        });
         return view;
     }
 
